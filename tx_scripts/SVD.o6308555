@@ -1,0 +1,35 @@
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]Loading pipeline components...:  20%|██        | 1/5 [00:05<00:20,  5.06s/it]/home/users/ntu/tianxin3/project/diffusers/src/diffusers/models/lora.py:384: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleLinear", "1.0.0", deprecation_message)
+/home/users/ntu/tianxin3/project/diffusers/src/diffusers/models/lora.py:300: FutureWarning: `LoRACompatibleConv` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleConv` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleConv", "1.0.0", deprecation_message)
+Loading pipeline components...:  40%|████      | 2/5 [00:12<00:18,  6.28s/it]Loading pipeline components...:  80%|████████  | 4/5 [00:12<00:02,  2.42s/it]Loading pipeline components...: 100%|██████████| 5/5 [00:12<00:00,  1.79s/it]Loading pipeline components...: 100%|██████████| 5/5 [00:12<00:00,  2.56s/it]
+  0%|          | 0/25 [00:00<?, ?it/s]  4%|▍         | 1/25 [00:02<00:59,  2.50s/it]  8%|▊         | 2/25 [00:03<00:42,  1.87s/it] 12%|█▏        | 3/25 [00:05<00:36,  1.66s/it] 16%|█▌        | 4/25 [00:06<00:32,  1.57s/it] 20%|██        | 5/25 [00:08<00:30,  1.51s/it] 24%|██▍       | 6/25 [00:09<00:28,  1.48s/it] 28%|██▊       | 7/25 [00:11<00:26,  1.46s/it] 32%|███▏      | 8/25 [00:12<00:24,  1.45s/it] 36%|███▌      | 9/25 [00:13<00:23,  1.44s/it] 40%|████      | 10/25 [00:15<00:21,  1.44s/it] 44%|████▍     | 11/25 [00:16<00:20,  1.44s/it] 48%|████▊     | 12/25 [00:18<00:18,  1.43s/it] 52%|█████▏    | 13/25 [00:19<00:17,  1.43s/it] 56%|█████▌    | 14/25 [00:21<00:15,  1.43s/it] 60%|██████    | 15/25 [00:22<00:14,  1.43s/it] 64%|██████▍   | 16/25 [00:23<00:12,  1.43s/it] 68%|██████▊   | 17/25 [00:25<00:11,  1.43s/it] 72%|███████▏  | 18/25 [00:26<00:10,  1.43s/it] 76%|███████▌  | 19/25 [00:28<00:08,  1.43s/it] 80%|████████  | 20/25 [00:29<00:07,  1.43s/it] 84%|████████▍ | 21/25 [00:31<00:05,  1.43s/it] 88%|████████▊ | 22/25 [00:32<00:04,  1.43s/it] 92%|█████████▏| 23/25 [00:33<00:02,  1.43s/it] 96%|█████████▌| 24/25 [00:35<00:01,  1.43s/it]100%|██████████| 25/25 [00:36<00:00,  1.43s/it]100%|██████████| 25/25 [00:36<00:00,  1.47s/it]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2024-02-29 20:44:48.671868:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 6308555.pbs101
+	Project: 12003828
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(16), Used(16)
+	CPU Time Used: 00:00:52
+	Memory: Requested(110gb), Used(7275376kb)
+	Vmem Used: 30211440kb
+	Walltime: Requested(01:00:00), Used(00:01:40)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (asp2a-gpu011:ngpus=1:ncpus=16:mem=115343360kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	GPU Duration: 1.69mins
+	GPU Energy Consumed: 171.24W
+	GPU Max GPU Memory Used: 28.66GB
+	Memory Throughput Rate (Average): asp2a-gpu011:(gpu2:18%)
+	Memory Throughput Rate (Max): asp2a-gpu011:(gpu2:53%)
+	Memory Throughput Rate (Min): asp2a-gpu011:(gpu2:0%)
+	GPU SM Utilization (Average): asp2a-gpu011:(gpu2:36%)
+	GPU SM Utilization (Max): asp2a-gpu011:(gpu2:100%)
+	GPU SM Utilization (Min): asp2a-gpu011:(gpu2:0%)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Warning: None
+GPU application profile: Medium
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
