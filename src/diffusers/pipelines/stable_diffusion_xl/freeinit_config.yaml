@@ -1,0 +1,15 @@
+# freeinit config:
+# diffuse_timestep: 999
+# diffuse_timestep: 981
+num_iters: 5
+sampling_schedule: 'constant' # constant, triangle
+
+filter_params:
+  method: 'gaussian'
+  d_s: 0.125
+  # d_t: 0.0
+
+# filter_params:
+#   method: 'butterworth'
+#   n: 4
+#   d_s: 0.25
