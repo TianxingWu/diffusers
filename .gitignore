@@ -176,3 +176,8 @@ tags
 
 # wandb
 wandb
+
+# tx
+outputs
+src/diffusers/pipelines/stable_diffusion_xl/results
+results
