@@ -1729,8 +1729,10 @@ class StableDiffusionXLFreeInitPipeline(StableDiffusionXLPipeline):
                 )
                 # 3. Roise Reinitialization
                 # latents = freq_mix_3d(z_T.unsqueeze(2).to(dtype=torch.float32), z_rand.unsqueeze(2).to(dtype=torch.float32), LPF=self.freq_filter).squeeze(2)
-                # latents = freq_mix_2d(z_T.to(dtype=torch.float32), z_rand.to(dtype=torch.float32), LPF=self.freq_filter)
-                latents = z_T
+                # if use filter:
+                latents = freq_mix_2d(z_T.to(dtype=torch.float32), z_rand.to(dtype=torch.float32), LPF=self.freq_filter)
+                # if no filter:
+                # latents = z_T
                 latents = latents.to(latents_dtype)
             
             # Coarse-to-Fine Sampling for Fast Inference (can lead to sub-optimal results)
