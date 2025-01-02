@@ -26,6 +26,7 @@ from diffusers.utils.testing_utils import (
     floats_tensor,
     load_image,
     nightly,
+    require_accelerator,
     require_torch,
     torch_device,
 )
@@ -93,7 +94,7 @@ class LDMSuperResolutionPipelineFastTests(unittest.TestCase):
 
         assert np.abs(image_slice.flatten() - expected_slice).max() < 1e-2
 
-    @unittest.skipIf(torch_device != "cuda", "This test requires a GPU")
+    @require_accelerator
     def test_inference_superresolution_fp16(self):
         unet = self.dummy_uncond_unet
         scheduler = DDIMScheduler()
@@ -124,7 +125,7 @@ class LDMSuperResolutionPipelineIntegrationTests(unittest.TestCase):
         )
         init_image = init_image.resize((64, 64), resample=PIL_INTERPOLATION["lanczos"])
 
-        ldm = LDMSuperResolutionPipeline.from_pretrained("duongna/ldm-super-resolution", device_map="auto")
+        ldm = LDMSuperResolutionPipeline.from_pretrained("duongna/ldm-super-resolution")
         ldm.set_progress_bar_config(disable=None)
 
         generator = torch.manual_seed(0)

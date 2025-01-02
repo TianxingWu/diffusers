@@ -175,9 +175,13 @@ tags
 .ruff_cache
 
 # wandb
+<<<<<<< HEAD
 wandb
 
 # tx
 outputs
 src/diffusers/pipelines/stable_diffusion_xl/results
 results
+=======
+wandb
+>>>>>>> 4b9f1c7d8c2e476eed38af3144b79105a5efcd93

@@ -63,7 +63,8 @@ class Unet2DModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
 
     def prepare_init_args_and_inputs_for_common(self):
         init_dict = {
-            "block_out_channels": (32, 64),
+            "block_out_channels": (4, 8),
+            "norm_num_groups": 2,
             "down_block_types": ("DownBlock2D", "AttnDownBlock2D"),
             "up_block_types": ("AttnUpBlock2D", "UpBlock2D"),
             "attention_head_dim": 3,
@@ -78,9 +79,8 @@ class Unet2DModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
     def test_mid_block_attn_groups(self):
         init_dict, inputs_dict = self.prepare_init_args_and_inputs_for_common()
 
-        init_dict["norm_num_groups"] = 16
         init_dict["add_attention"] = True
-        init_dict["attn_norm_num_groups"] = 8
+        init_dict["attn_norm_num_groups"] = 4
 
         model = self.model_class(**init_dict)
         model.to(torch_device)
@@ -104,6 +104,23 @@ class Unet2DModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
         self.assertIsNotNone(output)
         expected_shape = inputs_dict["sample"].shape
         self.assertEqual(output.shape, expected_shape, "Input and output shapes do not match")
+
+    def test_gradient_checkpointing_is_applied(self):
+        expected_set = {
+            "AttnUpBlock2D",
+            "AttnDownBlock2D",
+            "UNetMidBlock2D",
+            "UpBlock2D",
+            "DownBlock2D",
+        }
+
+        # NOTE: unlike UNet2DConditionModel, UNet2DModel does not currently support tuples for `attention_head_dim`
+        attention_head_dim = 8
+        block_out_channels = (16, 32)
+
+        super().test_gradient_checkpointing_is_applied(
+            expected_set=expected_set, attention_head_dim=attention_head_dim, block_out_channels=block_out_channels
+        )
 
 
 class UNetLDMModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
@@ -164,7 +181,7 @@ class UNetLDMModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
 
     @require_torch_accelerator
     def test_from_pretrained_accelerate_wont_change_results(self):
-        # by defautl model loading will use accelerate as `low_cpu_mem_usage=True`
+        # by default model loading will use accelerate as `low_cpu_mem_usage=True`
         model_accelerate, _ = UNet2DModel.from_pretrained("fusing/unet-ldm-dummy-update", output_loading_info=True)
         model_accelerate.to(torch_device)
         model_accelerate.eval()
@@ -219,6 +236,17 @@ class UNetLDMModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
         # fmt: on
 
         self.assertTrue(torch_all_close(output_slice, expected_output_slice, rtol=1e-3))
+
+    def test_gradient_checkpointing_is_applied(self):
+        expected_set = {"DownBlock2D", "UNetMidBlock2D", "UpBlock2D"}
+
+        # NOTE: unlike UNet2DConditionModel, UNet2DModel does not currently support tuples for `attention_head_dim`
+        attention_head_dim = 32
+        block_out_channels = (32, 64)
+
+        super().test_gradient_checkpointing_is_applied(
+            expected_set=expected_set, attention_head_dim=attention_head_dim, block_out_channels=block_out_channels
+        )
 
 
 class NCSNppModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
@@ -329,3 +357,17 @@ class NCSNppModelTests(ModelTesterMixin, UNetTesterMixin, unittest.TestCase):
     def test_forward_with_norm_groups(self):
         # not required for this model
         pass
+
+    def test_gradient_checkpointing_is_applied(self):
+        expected_set = {
+            "UNetMidBlock2D",
+        }
+
+        block_out_channels = (32, 64, 64, 64)
+
+        super().test_gradient_checkpointing_is_applied(
+            expected_set=expected_set, block_out_channels=block_out_channels
+        )
+
+    def test_effective_gradient_checkpointing(self):
+        super().test_effective_gradient_checkpointing(skip={"time_proj.weight"})
